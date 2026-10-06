@@ -20,18 +20,16 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
             set -e
-
-            cd /home/schrodinger/degradacia
-
-            echo "== Pull latest code =="
-            git fetch origin
-            git reset --hard origin/master
-
-            echo "== Install dependencies =="
-            npm ci --omit=dev
-
-            echo "== Restart service =="
-            sudo systemctl restart night-frontier
-
-            echo "== Status =="
-            sudo systemctl --no-pager --full status night-frontier
+      
+            echo "===== IDENTITY ====="
+            whoami
+            id
+      
+            echo "===== SUDO ====="
+            sudo -n -l
+      
+            echo "===== RESTART ====="
+            sudo -n /usr/bin/systemctl restart night-frontier
+      
+            echo "===== STATUS ====="
+            sudo -n /usr/bin/systemctl --no-pager --full status night-frontier
