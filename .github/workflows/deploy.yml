@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - master
-
   workflow_dispatch:
 
 jobs:
@@ -20,16 +19,4 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
             set -e
-      
-            echo "===== IDENTITY ====="
-            whoami
-            id
-      
-            echo "===== SUDO ====="
-            sudo -n -l
-      
-            echo "===== RESTART ====="
-            sudo -n /usr/bin/systemctl restart night-frontier
-      
-            echo "===== STATUS ====="
-            sudo -n /usr/bin/systemctl --no-pager --full status night-frontier
+            sudo -n /usr/local/bin/deploy-night-frontier
